@@ -23,6 +23,7 @@ class App extends Component{
                 <div className="left-container"></div>
                 <div className="middle-container">
                     <Cases/>
+                    <div>HI This is Arif test</div>
                 </div>
                 <div className="right-container"></div>
             </div>
