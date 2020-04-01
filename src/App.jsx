@@ -10,7 +10,7 @@ class App extends Component{
             pageTitle:"COVID-19 Live Stats",
         }
         return(
-            <>
+            <div className="main-container">
             <div className="header-container">
                 <div className="header-container-logo">
                     <img src={require('./assets/img/logo.png')} alt="Logo" title="Logo"></img>
@@ -31,7 +31,7 @@ class App extends Component{
                         Data shown on this website is pulled from <a href="https://github.com/mathdroid/covid-19-api" target="_blank">github repository</a>.<br/>
                         Statistics shown here is for displaying information only !</p>
             </div>
-            </>
+            </div>
         );
     }
 }

@@ -49,7 +49,7 @@ class Cases extends React.Component{
       <div className="cases-container">
         <h1>{this.state.country} Latest COVID-19 Cases</h1>
         <span>{this.currentDateTime}</span>
-        <div className="card-container">
+        <div className="card-container flex">
           <div className="card-container-ind">
             <div className="inner-top">
               <img src={require('../assets/img/confirmed.png')}/>

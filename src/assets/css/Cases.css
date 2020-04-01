@@ -9,27 +9,29 @@
 }
 .card-container{
     width: 100%;
-    height: auto;
-    margin: 0;
-    padding: 10px;
+    height:max-content;
+    margin: 0em;
+    padding:0em;
     float: auto;
     text-align: center;
 }
 .card-container-ind{
-    width: 28%;
+    width: max-content;
+    height: auto;
     padding: 0%;
-    margin-right: 20px;
+    margin: 1em;
     display: inline-block;
     text-align: center;
     font-size: xx-large;
 }
 .inner-bottom{
     width: 100%;
-    height: 100%;
+    height:max-content;
     margin-top: 10px;
     padding: 20px;
     border-radius: 5%;
 }
+
 .confirmed{
     background-color:#f0f0f0;
 }
