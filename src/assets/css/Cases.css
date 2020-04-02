@@ -4,8 +4,8 @@
     margin: 0;
     padding: 0;
     text-align: center;
-    font-size: xx-large;
-    font-weight: bolder;
+    font-size: large;
+    font-weight: bold;
 }
 .card-container{
     width: 100%;
@@ -22,7 +22,6 @@
     margin: 1em;
     display: inline-block;
     text-align: center;
-    font-size: xx-large;
 }
 .inner-bottom{
     width: 100%;
@@ -43,9 +42,10 @@
 }
 .country-listing-container{
     width: 100%;
+    margin-bottom: 1em;
 }
 .country-listing-container .select-country{
-    width:100%;
+    width:80%;
     overflow: hidden;
 }
 .country-listing-container label{

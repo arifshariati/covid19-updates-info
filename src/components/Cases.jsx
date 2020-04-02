@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import NumberFormat from 'react-number-format';
+import { Table } from 'antd';
 import '../assets/css/Cases.css';
 import 'antd/dist/antd.css';
 
@@ -15,31 +16,58 @@ class Cases extends React.Component{
     confirmed:0,
     recovered:0,
     deaths:0,
-    countries:[]
+    country:"",
+    countries:[],
+    countriesData:[]
   }
+  columns=[
+    {
+      title:'Country',
+      dataIndex:'countryRegion',
+      key:'countryRegion',
+    },
+    {
+      title:'Confirmed',
+      dataIndex:'confirmed',
+      className:'column-number',
+      key:'confirmed'
+    },
+    {
+      title:'Recovered',
+      dataIndex:'recovered',
+      key:'recovered'
+    },
+    {
+      title:'Deaths',
+      dataIndex:'deaths',
+      key:'deaths'
+    }
+  ];
+
   componentDidMount(){
     this.getCases();
   }
   async getCases(){
     const response=await Axios.get('https://covid19.mathdro.id/api');
-
-    const resCountries=await Axios.get('https://covid19.mathdro.id/api/countries');
-    {/*const countries=Object.keys(resCountries.data.countries);*/}
-    console.log(resCountries);
+    const resCountryOptions=await Axios.get('https://covid19.mathdro.id/api/countries');
+    const resCountries=await Axios.get('https://covid19.mathdro.id/api/confirmed');
     this.setState({
       confirmed:response.data.confirmed.value,
       recovered:response.data.recovered.value,
       deaths:response.data.deaths.value,
-      countries:resCountries.data.countries
+      countries:resCountryOptions.data.countries,
+      countriesData:resCountries.data
     });
   }
   async getCountryData(e){
     {/* const res = await Axios.get('https://covid19.mathdro.id/api/countries/'+e.target.value); */}
-    const res = await Axios.get('https://covid19.mathdro.id/api/countries/'+e.target.value);
+    const selectedCountry=e.target.value;
+    const res = await Axios.get('https://covid19.mathdro.id/api/countries/'+selectedCountry);
     this.setState({
       confirmed:res.data.confirmed.value,
       recovered:res.data.recovered.value,
-      deaths:res.data.deaths.value
+      deaths:res.data.deaths.value,
+      country:selectedCountry.concat("'s")
     });
   }
   renderCountryOptions(){
@@ -51,8 +79,9 @@ class Cases extends React.Component{
     return(
       
       <div className="cases-container">
-        <h1>{this.state.country} Latest COVID-19 Cases</h1>
+        <h3><b>{this.state.country} Latest COVID-19 Cases</b></h3>
         <span>{this.currentDateTime}</span>
+
         <div className="card-container flex">
           <div className="card-container-ind">
             <div className="inner-top">
@@ -90,8 +119,12 @@ class Cases extends React.Component{
         <div className="country-listing-container">
           <label>Select Country</label>
           <select className="select-country" onChange={this.getCountryData}>
+            <option key={99999}>Global</option>
             {this.renderCountryOptions()}  
           </select>
+        </div>
+        <div>
+        <Table columns={this.columns} dataSource={this.state.countriesData} size="small" bordered={true} pagination={false} />
         </div>
       </div>
     )
