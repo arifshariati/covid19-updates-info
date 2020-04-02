@@ -44,8 +44,12 @@
 .country-listing-container{
     width: 100%;
 }
+.country-listing-container .select-country{
+    width:100%;
+    overflow: hidden;
+}
 .country-listing-container label{
-    margin-right: 50px;
+    margin-right: 1em;
 }
 .number-foramt{
     background-color: none;

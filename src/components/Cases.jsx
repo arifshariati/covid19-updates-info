@@ -87,7 +87,7 @@ class Cases extends React.Component{
             
           </div>
         </div>
-        <div className="country-listing-container flex">
+        <div className="country-listing-container">
           <label>Select Country</label>
           <select className="select-country" onChange={this.getCountryData}>
             {this.renderCountryOptions()}  
