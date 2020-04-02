@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Axios from 'axios';
 import NumberFormat from 'react-number-format';
 import '../assets/css/Cases.css';
@@ -22,17 +22,20 @@ class Cases extends React.Component{
   }
   async getCases(){
     const response=await Axios.get('https://covid19.mathdro.id/api');
+
     const resCountries=await Axios.get('https://covid19.mathdro.id/api/countries');
-    const countries=Object.keys(resCountries.data.countries);
+    {/*const countries=Object.keys(resCountries.data.countries);*/}
+    console.log(resCountries);
     this.setState({
       confirmed:response.data.confirmed.value,
       recovered:response.data.recovered.value,
       deaths:response.data.deaths.value,
-      countries
+      countries:resCountries.data.countries
     });
   }
   async getCountryData(e){
-    const res = await Axios.get('https://covid19.mathdro.id/api/countries/${e.target.value}');
+    {/* const res = await Axios.get('https://covid19.mathdro.id/api/countries/'+e.target.value); */}
+    const res = await Axios.get('https://covid19.mathdro.id/api/countries/'+e.target.value);
     this.setState({
       confirmed:res.data.confirmed.value,
       recovered:res.data.recovered.value,
@@ -41,11 +44,12 @@ class Cases extends React.Component{
   }
   renderCountryOptions(){
     return this.state.countries.map((country,i)=>{
-    return <option key={i}>{country}</option>
+    return <option key={i}>{country.name}</option>
     });
   }
   render(){
     return(
+      
       <div className="cases-container">
         <h1>{this.state.country} Latest COVID-19 Cases</h1>
         <span>{this.currentDateTime}</span>
